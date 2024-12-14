@@ -2,21 +2,22 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 class Boi {
-    private String CodBoi;
+    private String codBoi;
     private double peso;
     private String sexo;  // "Macho" ou "Fêmea"
     private double precoVenda;
+    private String Descricao;
 
 
-    public Boi(String CodBoi, double peso, String sexo, double precoVenda) {
-        this.CodBoi = CodBoi;
+    public Boi(String codBoi, double peso, String sexo, double precoVenda) {
+        this.codBoi = codBoi;
         this.peso = peso;
         this.sexo = sexo;
         this.precoVenda = precoVenda;
     }
 
-    public String getCodBoi() {
-        return CodBoi;
+    public String getcodBoi() {
+        return codBoi;
     }
 
     public double getPeso() {
@@ -33,7 +34,7 @@ class Boi {
 
     @Override
     public String toString() {
-        return "CodBoi: " + CodBoi + " | Peso: " + peso + "kg | Sexo: " + sexo + " | Preço de Venda: R$" + precoVenda;
+        return "codBoi: " + codBoi + " | Peso: " + peso + "kg | Sexo: " + sexo + " | Preço de Venda: R$" + precoVenda;
     }
 }
 
@@ -56,7 +57,7 @@ public class LevantamentoBoi {
             switch (opcao) {
                 case 1:
                     System.out.print("Digite o Código do boi: ");
-                    String Codboi = scanner.nextLine();
+                    String codboi = scanner.nextLine();
                     System.out.print("Digite o peso do boi (em kg): ");
                     double peso = scanner.nextDouble();
                     scanner.nextLine();
@@ -69,17 +70,17 @@ public class LevantamentoBoi {
                     System.out.print("Digite o preço de venda do boi: ");
                     double precoVenda = scanner.nextDouble();
                     scanner.nextLine();
-                    bois.add(new Boi(Codboi, peso, sexo, precoVenda));
+                    bois.add(new Boi(codboi, peso, sexo, precoVenda));
                     System.out.println("Boi cadastrado com sucesso!");
                     break;
 
                 case 2:
                     System.out.print("Digite o Código do boi a ser removido: ");
-                    String CodBoiRemover = scanner.nextLine();
+                    String codBoiRemover = scanner.nextLine();
                     Boi boiRemovido = null;
 
                     for (Boi boi : bois) {
-                        if (boi.getCodBoi().equals(CodBoiRemover)) {
+                        if (boi.getcodBoi().equals(codBoiRemover)) {
                             boiRemovido = boi;
                             break;
                         }
@@ -87,10 +88,10 @@ public class LevantamentoBoi {
 
                     if (boiRemovido != null) {
                         bois.remove(boiRemovido);
-                        String CodboiRemover = "";
-                        System.out.println("Boi com Codboi " + CodboiRemover + " removido com sucesso.");
+                        String codboiRemover = "";
+                        System.out.println("Boi com Codboi " + codboiRemover + " removido com sucesso.");
                     } else {
-                        System.out.println("Boi com Codboi " + CodBoiRemover + " não encontrado.");
+                        System.out.println("Boi com Codboi " + codBoiRemover + " não encontrado.");
                     }
                     break;
 
