@@ -7,7 +7,6 @@ class Boi {
     private String sexo;  // "Macho" ou "Fêmea"
     private double precoVenda;
 
-
     public Boi(String CodBoi, double peso, String sexo, double precoVenda) {
         this.CodBoi = CodBoi;
         this.peso = peso;
@@ -48,7 +47,7 @@ public class LevantamentoBoi {
         int opcao;
 
         do {
-            System.out.println("\nBem vindo a central de vendas");
+            System.out.println("\nBem-vindo à central de vendas");
             System.out.println("\nMenu de Opções:");
             System.out.println("1 - Cadastrar um novo animal");
             System.out.println("2 - Remover um animal");
@@ -59,26 +58,52 @@ public class LevantamentoBoi {
 
             switch (opcao) {
                 case 1:
-                    System.out.print("Digite o Código do boi: ");
-                    String Codboi = scanner.nextLine();
-                    System.out.print("Digite o peso do boi (em kg): ");
-                    double peso = scanner.nextDouble();
+                    String Codboi;
+                    do {
+                        System.out.print("Digite o Código do boi: ");
+                        Codboi = scanner.nextLine();
+                        if (Codboi == null || Codboi.trim().isEmpty()) {
+                            System.out.println("O código do boi não pode ser vazio! Tente novamente.");
+                        }
+                    } while (Codboi == null || Codboi.trim().isEmpty());
+
+                    double peso = 0;
+                    boolean pesoValido = false;
+                    do {
+                        System.out.print("Digite o peso do boi (em kg): ");
+                        if (scanner.hasNextDouble()) {
+                            peso = scanner.nextDouble();
+                            if (peso > 0) {
+                                pesoValido = true;
+                            } else {
+                                System.out.println("O peso do boi deve ser maior que zero! Tente novamente.");
+                            }
+                        } else {
+                            System.out.println("Por favor, insira um valor numérico válido para o peso.");
+                            scanner.next();
+                        }
+                    } while (!pesoValido);
                     scanner.nextLine();
-                    System.out.print("Digite o sexo do boi (Macho/Fêmea): ");
-                    String sexo = scanner.nextLine();
-                    while (!sexo.equalsIgnoreCase("Macho") && !sexo.equalsIgnoreCase("Fêmea")) {
-                        System.out.print("Sexo inválido! Digite novamente (Macho/Fêmea): ");
+
+                    String sexo;
+                    do {
+                        System.out.print("Digite o sexo do boi (Macho/Fêmea): ");
                         sexo = scanner.nextLine();
-                    }
+                        if (!sexo.equalsIgnoreCase("Macho") && !sexo.equalsIgnoreCase("Fêmea")) {
+                            System.out.println("Sexo inválido! Digite novamente (Macho/Fêmea): ");
+                        }
+                    } while (!sexo.equalsIgnoreCase("Macho") && !sexo.equalsIgnoreCase("Fêmea"));
+
                     System.out.print("Digite o preço de venda do boi: ");
                     double precoVenda = scanner.nextDouble();
                     scanner.nextLine();
+
                     bois.add(new Boi(Codboi, peso, sexo, precoVenda));
                     System.out.println("Boi cadastrado com sucesso!");
                     break;
 
                 case 2:
-                    System.out.print("Digite o Códifo do boi a ser removido: ");
+                    System.out.print("Digite o Código do boi a ser removido: ");
                     String idRemover = scanner.nextLine();
                     Boi boiRemovido = null;
 
